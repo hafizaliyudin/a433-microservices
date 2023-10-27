@@ -1,0 +1,62 @@
+# Mendefinisikan versi Kubernetes API yang digunakan
+apiVersion: networking.istio.io/v1alpha3
+
+# Menentukan jenis object yaitu Gateway
+kind: Gateway
+
+# Menentukan informasi tentang object
+metadata:
+  # Menentukan nama Gateway
+  name: ecommerce-gateway
+
+# Spesifikasi Gateway
+spec:
+  # Menentukan selektor untuk mengindentifikasi Ingress Gateway
+  selector:
+    istio: ingressgateway # use istio default controller
+  # Mendefinisikan properti server proxy pada load balancer
+  servers:
+    # Mendefinisikan port
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
+---
+# Mendefinisikan versi Kubernetes API yang digunakan
+apiVersion: networking.istio.io/v1alpha3
+
+# Menentukan jenis object yaitu VirtualService
+kind: VirtualService
+
+# Menentukan informasi tentang object
+metadata:
+  # Menentukan nama VirtualService
+  name: ecommerce
+
+# Spesifikasi Virtual Service
+spec:
+  # Menentukan tujuan di mana trafik akan dikirim
+  hosts:
+    - "*"
+  # Menentukan nama gateway yang dipakai
+  gateways:
+    - ecommerce-gateway
+  # Menentukan aturan rute untuk trafik HTTP
+  http:
+    # Kondisi yang harus dipenuhi supaya rule dapat diaktifkan
+    - match:
+        # Menentukan URI
+        - uri:
+            # URI harus sama persis dengan /order
+            exact: /order
+      # Menentukan rute tujuan kalau kondisi memenuhi
+      route:
+        # Menentukan tujuan
+        - destination:
+            # Menentukan service yang dituju
+            host: order-service
+            # Menentukan nomor port service yang dituju
+            port:
+              number: 3000

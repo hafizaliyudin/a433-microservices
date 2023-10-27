@@ -1,0 +1,24 @@
+# Mendefinisikan versi Kubernetes API yang digunakan
+apiVersion: v1
+
+# Menentukan jenis object
+kind: Service
+
+# Menentukan informasi tentang object
+metadata:
+  # Mendefinisikan nama service
+  name: order-service
+  # Mendefinisikan label
+  labels:
+    app: ecommerce
+
+# Menentukan spesifikasi yang diinginkan
+spec:
+  #  Menentukan port yang diexpose
+  ports:
+    - port: 3000
+  # Menentukan selektor untuk mencari pod dengan label app:ecommerce
+  selector:
+    app: ecommerce
+  # Menentukan tipe service
+  type: NodePort

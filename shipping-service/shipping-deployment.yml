@@ -1,0 +1,44 @@
+# Mendefinisikan versi Kubernetes API yang digunakan
+apiVersion: apps/v1
+
+# Menentukan jenis object
+kind: Deployment
+
+# Menentukan informasi tentang object
+metadata:
+  # Menentukan nama deployment
+  name: shipping-deployment
+  # Menentukan label
+  labels:
+    app: ecommerce
+
+# Menentukan informasi tentang object
+spec:
+  # Menentukan jumlah pod
+  replicas: 1
+  # Menentukan selektor untuk mengindentifikasi pod yang memiliki label app:ecommerce
+  selector:
+    matchLabels:
+      app: ecommerce
+  # Pod template
+  template:
+    # Membuat Pod dengan lable app:ecommerce
+    metadata:
+      labels:
+        app: ecommerce
+    # Spesifikasi Pod
+    spec:
+      # Mendefinisikan kontainer
+      containers:
+        # Membuat kontainer dengan nama shipping-service
+        - name: shipping-service
+          # Image diambil dari Github Packages
+          image: ghcr.io/hafizaliyudin/a433-microservices/shipping-service:v1
+          # Mengekspos port 3001
+          ports:
+            - containerPort: 3001
+          # Menentukan environment
+          env:
+            # Menentukan URL untuk mengakses RabbitMQ
+            - name: AMQP_URL
+              value: "amqp://user:VvLBkxsgr8vK1RJf@myrabbitmq.default.svc.cluster.local:5672"
