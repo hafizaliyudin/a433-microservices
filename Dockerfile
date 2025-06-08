@@ -1,6 +1,6 @@
 FROM node:18-alpine
 
-RUN apk add --no-cache python3 g++ make
+RUN apk update && apk add --no-cache python3 g++ make
 
 WORKDIR /app
 
