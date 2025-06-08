@@ -15,5 +15,14 @@ pipeline {
                 }
             }
         }
+
+        stage('show image  docker'){
+            steps {
+                script{
+                    def images = sh(script: 'docker images', returnStdout: true).trim()
+                    echo "Docker Images:\n${images}"
+                }
+            }
+        }
     }
 }
