@@ -1,5 +1,5 @@
-pipline{
-    agent any 
+pipeline {
+    agent any
 
     stages {
         stage('Checkout') {
@@ -8,12 +8,11 @@ pipline{
             }
         }
         stage('Build Docker Image') {
-            steps{
+            steps {
                 script {
-                    docker build -t todo-app:latest .
+                    docker.build('todo-app:latest')
                 }
             }
         }
-        
     }
 }
