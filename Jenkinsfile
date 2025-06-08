@@ -27,7 +27,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh 'docker run -d -p 3000:3000 --name todo-app todo-app:latest'
+                    sh 'docker run -dp 3000:3000 --name todo-app -v todo-db:/etc/todos todo-app:latest'
                 }
             }
         }
