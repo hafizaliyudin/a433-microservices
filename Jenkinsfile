@@ -23,5 +23,14 @@ pipeline {
                 }
             }
         }
+        
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    def container = docker.run('todo-app:latest', '-p 3000:3000')
+                    echo "Container ID: ${container.id}"
+                }
+            }
+        }
     }
 }
