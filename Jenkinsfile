@@ -11,7 +11,6 @@ pipeline {
             steps {
                 script {
                     docker.build('todo-app:latest')
-                    docker images
                 }
             }
         }
