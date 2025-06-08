@@ -1,7 +1,6 @@
 FROM node:18
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories \
-    && apk update && apk add --no-cache python3 g++ make
+RUN apt-get update && apt-get install -y python3 g++ make && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
