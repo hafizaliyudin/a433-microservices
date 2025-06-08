@@ -27,18 +27,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh 'docker run -d \
-     --name mysql-db \
-
-     --network todo-app --network-alias mysql \
-
-     -v todo-mysql-data:/var/lib/mysql \
-
-     -e MYSQL_ROOT_PASSWORD=dicoding \
-
-     -e MYSQL_DATABASE=todo-db \
-
-     mysql:5.7'
+                    sh 'docker run -dp 3000:3000 --name todo-app -v todo-db:/etc/todos todo-app:latest'
                 }
             }
         }
