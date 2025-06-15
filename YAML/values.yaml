@@ -1,10 +1,20 @@
---
-apiVersion: v1
-kind: pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: todo-app
-  specs:
-    containers:
-      - image:  image
-      name:  my-name
-      env:
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      containers:
+        - name: todo-app
+          image: asia-docker.pkg.dev/hafiz-458806/registry-image/todo-app:v1
+          ports:
+            - containerPort: 3000
