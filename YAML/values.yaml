@@ -16,6 +16,6 @@ spec:
       serviceAccountName: ksa-dengan-workload-identity  # <- HARUS sesuai service account yang diberi IAM
       containers:
         - name: todo-app
-          image: asia-docker.pkg.dev/hafiz-458806/registry-image/todo-app:v1
+          image: asia-southeast1-docker.pkg.dev/hafiz-458806/registry-image/todo-app:v1
           ports:
             - containerPort: 3000
