@@ -12,6 +12,8 @@ spec:
     metadata:
       labels:
         app: todo-app
+      annotations:
+        iam.gke.io/gcp-service-account: ksa-dengan-workload-identity
     spec:
       containers:
         - name: todo-app
