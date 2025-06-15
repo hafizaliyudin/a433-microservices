@@ -1,0 +1,10 @@
+--
+apiVersion: v1
+kind: pod
+metadata:
+  name: todo-app
+  specs:
+    containers:
+      - image:  image
+      name:  my-name
+      env:
